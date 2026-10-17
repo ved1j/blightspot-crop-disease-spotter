@@ -1,0 +1,108 @@
+{
+  "pixel_acc": 0.9974490356445312,
+  "iou": {
+    "background": 0.9976126251821535,
+    "leaf": 0.9904682325441517,
+    "early_blight": 0.9687206945578849,
+    "rust": 0.9456262898872837,
+    "powdery_mildew": 0.9134250947536405,
+    "bacterial_spot": 0.9261629200979301
+  },
+  "mean_disease_iou": 0.9384837498241848,
+  "diagnosis_acc": 0.9921875,
+  "diagnosis_confusion": {
+    "labels": [
+      "healthy",
+      "early_blight",
+      "rust",
+      "powdery_mildew",
+      "bacterial_spot"
+    ],
+    "matrix": [
+      [
+        53,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        65,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        41,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        50,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        45
+      ]
+    ]
+  },
+  "n_images": 256,
+  "steps": 3000,
+  "batch_size": 24,
+  "train_seconds": 869,
+  "device": "mps",
+  "history": [
+    {
+      "step": 500,
+      "loss": 0.15321508049964905,
+      "pixel_acc": 0.981031494140625,
+      "mean_disease_iou": 0.8393174739034774,
+      "diagnosis_acc": 0.9791666666666666
+    },
+    {
+      "step": 1000,
+      "loss": 0.09739533811807632,
+      "pixel_acc": 0.9945703125,
+      "mean_disease_iou": 0.9091707389348789,
+      "diagnosis_acc": 1.0
+    },
+    {
+      "step": 1500,
+      "loss": 0.06274719536304474,
+      "pixel_acc": 0.996279296875,
+      "mean_disease_iou": 0.9254628155081643,
+      "diagnosis_acc": 1.0
+    },
+    {
+      "step": 2000,
+      "loss": 0.05328204855322838,
+      "pixel_acc": 0.9970296223958334,
+      "mean_disease_iou": 0.9308738898384037,
+      "diagnosis_acc": 1.0
+    },
+    {
+      "step": 2500,
+      "loss": 0.0441584512591362,
+      "pixel_acc": 0.9972713216145833,
+      "mean_disease_iou": 0.9353892034643214,
+      "diagnosis_acc": 1.0
+    },
+    {
+      "step": 3000,
+      "loss": 0.05152420699596405,
+      "pixel_acc": 0.9973331705729167,
+      "mean_disease_iou": 0.9373137775156035,
+      "diagnosis_acc": 1.0
+    }
+  ]
+}
