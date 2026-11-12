@@ -20,6 +20,7 @@
     --healthy: #2b7a40; --mild: #b88a0b; --moderate: #d9611a; --severe: #c4233d; --unknown: #6b7280;
     --warn-bg: #fff4d6; --warn-ink: #6b4d00;
     --shadow: 0 1px 2px rgba(20, 40, 25, .06), 0 4px 16px rgba(20, 40, 25, .05);
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
@@ -33,7 +34,7 @@
   html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
-    font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font: 16px/1.45 var(--font);
     padding: env(safe-area-inset-top) max(16px, env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
   }
   main { max-width: 560px; margin: 0 auto; }
@@ -45,14 +46,14 @@
   h2 { font-size: 1rem; margin: 0 0 10px; }
   .sub { color: var(--muted); margin: 6px 0 0; font-size: .95rem; }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px; margin-top: 14px; box-shadow: var(--shadow); }
-  .icon-btn { background: var(--card); border: 1px solid var(--line); color: var(--ink); border-radius: 999px; min-height: 40px; padding: 0 14px; font: 600 .85rem/1 inherit; cursor: pointer; }
+  .icon-btn { background: var(--card); border: 1px solid var(--line); color: var(--ink); border-radius: 999px; min-height: 40px; padding: 0 14px; font: 600 .85rem/1 var(--font); cursor: pointer; }
 
   /* capture */
   .drop { display: grid; gap: 10px; border-radius: 14px; transition: background .15s, outline-color .15s; outline: 2px dashed transparent; outline-offset: 6px; }
   .drop.dragging { outline-color: var(--accent); background: var(--sunk); }
   .btn {
     appearance: none; border: 0; border-radius: 14px; min-height: 54px; width: 100%;
-    font: 600 1rem/1 inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+    font: 600 1rem/1 var(--font); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
     text-decoration: none; user-select: none;
   }
   .btn svg { width: 20px; height: 20px; }
@@ -64,7 +65,7 @@
   .hint { color: var(--muted); font-size: .8rem; text-align: center; margin: 2px 0 0; }
   .chips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 4px; margin: 10px -2px 0; scrollbar-width: none; }
   .chips::-webkit-scrollbar { display: none; }
-  .chip { flex: none; border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px; padding: 8px 12px; font: 500 .85rem/1 inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .chip { flex: none; border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px; padding: 8px 12px; font: 500 .85rem/1 var(--font); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
   .chip i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
   .label { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; margin-top: 14px; }
 
@@ -93,7 +94,7 @@
 
   /* viewer */
   .tabs { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; scrollbar-width: none; }
-  .tabs button { flex: none; min-height: 36px; padding: 0 14px; font: 600 .82rem/1 inherit; border-radius: 999px; background: var(--sunk); color: var(--ink); border: 1px solid var(--line); cursor: pointer; white-space: nowrap; }
+  .tabs button { flex: none; min-height: 36px; padding: 0 14px; font: 600 .82rem/1 var(--font); border-radius: 999px; background: var(--sunk); color: var(--ink); border: 1px solid var(--line); cursor: pointer; white-space: nowrap; }
   .tabs button[aria-pressed=true] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
   .stage { position: relative; aspect-ratio: 1; border-radius: 14px; overflow: hidden; background: #000; touch-action: pan-y; }
   .stage img { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; display: block; }
@@ -135,7 +136,7 @@
 
   /* history */
   .history-head { display: flex; justify-content: space-between; align-items: center; }
-  .history-head button { background: none; border: 0; color: var(--muted); font: 500 .8rem/1 inherit; cursor: pointer; padding: 6px; }
+  .history-head button { background: none; border: 0; color: var(--muted); font: 500 .8rem/1 var(--font); cursor: pointer; padding: 6px; }
   .history { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
   .history::-webkit-scrollbar { display: none; }
   .h-item { flex: none; width: 92px; background: none; border: 0; padding: 0; text-align: left; color: var(--ink); cursor: pointer; font: inherit; }
@@ -155,6 +156,22 @@
   table { width: 100%; border-collapse: collapse; font-size: .85rem; font-variant-numeric: tabular-nums; }
   td, th { padding: 6px 4px; border-top: 1px solid var(--line); text-align: left; }
   td:last-child, th:last-child { text-align: right; }
+
+  .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .engine-note { color: var(--muted); font-size: .78rem; margin: 12px 0 0; display: flex; align-items: center; gap: 6px; }
+
+  /* live camera */
+  dialog.live { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; border-radius: 0; background: #000; color: #fff; padding: 0; }
+  dialog.live[open] { display: grid; grid-template-rows: 1fr auto; }
+  .live-stage { display: grid; place-items: center; padding: max(12px, env(safe-area-inset-top)) 12px 0; min-height: 0; }
+  .live-square { position: relative; width: min(100%, calc(100dvh - 220px)); aspect-ratio: 1; border-radius: 20px; overflow: hidden; background: #111; }
+  .live-square video, .live-square canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .live-square::after { content: ""; position: absolute; inset: 0; border: 2px solid rgba(255,255,255,.5); border-radius: 20px; pointer-events: none; }
+  .live-hud { padding: 14px 16px calc(16px + env(safe-area-inset-bottom)); display: grid; gap: 12px; max-width: 560px; width: 100%; margin: 0 auto; }
+  .live-hud .dx { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .live-hud b { font-size: 1.3rem; }
+  .live-hud small { color: #b9c4bc; font-variant-numeric: tabular-nums; }
+  .live-hud .btn.secondary { background: #1c241f; color: #fff; border-color: #2c3830; }
 
   footer { color: var(--muted); font-size: .76rem; margin-top: 20px; text-align: center; }
   [hidden] { display: none !important; }
@@ -183,12 +200,18 @@
         Take photo
       </label>
       <input id="camera" type="file" accept="image/*" capture="environment">
-      <label class="btn secondary" for="gallery" id="galleryBtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
-        Choose image
-      </label>
+      <div class="btn-row" id="btnRow">
+        <button class="btn secondary" type="button" id="liveBtn" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg>
+          Live scan
+        </button>
+        <label class="btn secondary" for="gallery" id="galleryBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+          Choose image
+        </label>
+      </div>
       <input id="gallery" type="file" accept="image/*">
-      <p class="hint" id="dropHint">Tip: fill the frame with one leaf, in even light.</p>
+      <p class="hint" id="dropHint">Tip: fill the frame with one leaf, in even light. Photos are analysed on your device.</p>
     </div>
     <div class="label">No leaf handy? Try a synthetic one</div>
     <div class="chips" id="samples"></div>
@@ -213,6 +236,7 @@
         <div><b id="conf">–</b><small>confidence</small></div>
       </div>
       <div class="warn" id="warnings" hidden></div>
+      <p class="engine-note" id="engineNote"></p>
     </section>
 
     <section class="card">
@@ -274,9 +298,31 @@
   </div>
 </dialog>
 
+<dialog id="live" class="live" aria-label="Live scan">
+  <div class="live-stage">
+    <div class="live-square">
+      <video id="liveVideo" playsinline muted autoplay></video>
+      <canvas id="liveCanvas" width="128" height="128"></canvas>
+    </div>
+  </div>
+  <div class="live-hud">
+    <div class="dx"><b id="liveDx">Starting camera…</b><small id="liveFps"></small></div>
+    <small id="liveStats">Lesions are highlighted live. Capture for a full analysis.</small>
+    <div class="btn-row">
+      <button class="btn secondary" type="button" id="liveClose">Close</button>
+      <button class="btn primary" type="button" id="liveCapture" disabled>Capture</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="engine.js"></script>
 <script>
 "use strict";
-const API = new URLSearchParams(location.search).get("api") || "";
+const PARAMS = new URLSearchParams(location.search);
+const API = PARAMS.get("api") || "";
+const FORCE_ENGINE = PARAMS.get("engine"); // "server" | "device" | null
+let serverUp = false;     // is the FastAPI backend reachable? (false on GitHub Pages)
+let samplePack = null;
 const $ = (id) => document.getElementById(id);
 const SEVERITY = { healthy: "var(--healthy)", mild: "var(--mild)", moderate: "var(--moderate)", severe: "var(--severe)", unknown: "var(--unknown)" };
 const SAMPLE_KINDS = [
@@ -311,8 +357,9 @@ function fail(msg) {
   if (current) $("results").hidden = false;
 }
 
+const apiUrl = (path) => (API ? `${API.replace(/\/$/, "")}/${path}` : path); // relative: works under a sub-path
 async function api(path, opts) {
-  const r = await fetch(`${API}${path}`, opts);
+  const r = await fetch(apiUrl(path), opts);
   if (!r.ok) {
     const detail = (await r.json().catch(() => ({}))).detail;
     throw new Error(typeof detail === "string" ? detail : r.statusText || `HTTP ${r.status}`);
@@ -332,26 +379,65 @@ async function downscale(file, max = 1024) {
 }
 
 /* ---------- actions ---------- */
+const busyMsg = (msg) => (BlightEngine.ready ? msg : "Loading on-device model…");
+
 async function analyzeFile(file) {
   if (!file) return;
   if (!file.type.startsWith("image/") && file.type) return fail("That doesn't look like an image.");
-  setBusy(true, "Analyzing leaf…");
+  setBusy(true, busyMsg("Analyzing on your device…"));
   try {
-    const body = new FormData();
-    body.append("file", await downscale(file), "leaf.jpg");
-    const res = await api("/analyze", { method: "POST", body });
+    let res;
+    if (FORCE_ENGINE !== "server") {
+      try {
+        res = await BlightEngine.analyze(await createImageBitmap(file, { imageOrientation: "from-image" }));
+      } catch (e) {
+        if (!serverUp) throw e;
+        console.warn("on-device analysis failed; falling back to server", e);
+      }
+    }
+    if (!res) {
+      const body = new FormData();
+      body.append("file", await downscale(file), "leaf.jpg");
+      res = { ...(await api("analyze", { method: "POST", body })), engine: "server" };
+    }
     res.source = "photo";
     show(res, true);
   } catch (e) { fail(`Couldn't analyze: ${e.message}`); }
 }
 
 async function sample(kind = "random") {
-  setBusy(true, "Growing a synthetic leaf…");
+  setBusy(true, serverUp ? "Growing a synthetic leaf…" : busyMsg("Picking a synthetic leaf…"));
   try {
-    const res = await api(`/sample?disease=${encodeURIComponent(kind)}`);
+    const res = serverUp && FORCE_ENGINE !== "device"
+      ? { ...(await api(`sample?disease=${encodeURIComponent(kind)}`)), engine: "server" }
+      : await sampleFromPack(kind);
     res.source = "sample";
     show(res, true);
   } catch (e) { fail(`Couldn't load sample: ${e.message}`); }
+}
+
+/* Static hosting (no backend): use the pre-rendered sample pack + on-device model. */
+let lastSample = null;
+async function sampleFromPack(kind) {
+  samplePack ??= await fetch("samples/index.json").then((r) => r.json());
+  let pool = samplePack.filter((s) => kind === "random" || s.kind === kind);
+  if (!pool.length) throw new Error(`no samples for "${kind}"`);
+  if (pool.length > 1) pool = pool.filter((s) => s !== lastSample);
+  const s = (lastSample = pool[Math.floor(Math.random() * pool.length)]);
+  // fetch + createImageBitmap rather than <img>.decode(), which never settles in some WebViews.
+  const [bmp, maskB64] = await Promise.all([
+    fetch(s.image).then((r) => r.blob()).then((b) => createImageBitmap(b)),
+    fetchB64(s.mask),
+  ]);
+  const res = await BlightEngine.analyze(bmp);
+  res.images.ground_truth = maskB64;
+  res.ground_truth = s.ground_truth;
+  return res;
+}
+
+async function fetchB64(url) {
+  const blob = await fetch(url).then((r) => r.blob());
+  return new Promise((res) => { const fr = new FileReader(); fr.onload = () => res(fr.result.split(",")[1]); fr.readAsDataURL(blob); });
 }
 
 /* ---------- rendering ---------- */
@@ -427,6 +513,9 @@ function show(d, save) {
 
   $("disclaimer").textContent = d.disclaimer;
   $("timing").textContent = d.inference_ms != null ? ` · ${d.inference_ms} ms${d.tta ? " with TTA" : ""}` : "";
+  $("engineNote").textContent = d.engine === "on-device"
+    ? `🔒 Analysed on this device${d.inference_ms != null ? ` in ${d.inference_ms} ms` : ""}. Nothing was uploaded.`
+    : d.engine === "server" ? `☁️ Analysed by the BlightSpot server${d.inference_ms != null ? ` in ${d.inference_ms} ms` : ""}.` : "";
 
   if (save) saveHistory(d);
   $("results").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
@@ -542,7 +631,8 @@ $("againBtn").onclick = () => {
 $("modelBtn").onclick = async () => {
   $("modelSheet").showModal();
   try {
-    const m = await api("/metrics");
+    const m = (await BlightEngine.loadMeta()).metrics;
+    if (!m?.iou) throw new Error("no metrics in model/meta.json");
     const pct = (v) => v == null ? "–" : `${(v * 100).toFixed(1)}%`;
     const rows = Object.entries(m.iou).map(([k, v]) => el("tr", {}, el("td", { textContent: title(k) }), el("td", { textContent: pct(v) })));
     $("modelBody").replaceChildren(
@@ -583,6 +673,99 @@ $("samples").replaceChildren(...SAMPLE_KINDS.map(([k, label]) => {
   return b;
 }));
 
+/* ---------- live camera scan (on-device, ~real time) ---------- */
+let liveStream = null, liveRunning = false;
+
+async function startLive(stream) {
+  $("liveDx").textContent = "Starting camera…";
+  $("liveStats").textContent = "Lesions are highlighted live. Capture for a full analysis.";
+  $("liveFps").textContent = "";
+  $("liveCapture").disabled = true;
+  $("live").showModal();
+  try {
+    liveStream = stream || await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: "environment" }, width: { ideal: 1280 }, height: { ideal: 960 } }, audio: false,
+    });
+  } catch (e) {
+    stopLive();
+    return fail(e.name === "NotAllowedError" ? "Camera permission was denied." : `Camera unavailable: ${e.message}`);
+  }
+  const v = $("liveVideo");
+  v.srcObject = liveStream;
+  await v.play().catch(() => {});
+  if (!BlightEngine.ready) $("liveDx").textContent = "Loading on-device model…";
+  try { await BlightEngine.load(); } catch (e) { stopLive(); return fail(`Couldn't load the model: ${e.message}`); }
+  $("liveDx").textContent = "Point at a leaf";
+  $("liveCapture").disabled = false;
+  liveRunning = true;
+  liveLoop();
+}
+
+async function liveLoop() {
+  const v = $("liveVideo"), ctx = $("liveCanvas").getContext("2d");
+  let last = performance.now(), fps = 0;
+  while (liveRunning) {
+    if (v.readyState >= 2 && v.videoWidth) {
+      const { mask, n, summary } = await BlightEngine.segment(v, 128);
+      if (!liveRunning) break;
+      drawLiveMask(ctx, mask, n);
+      const now = performance.now();
+      fps = fps ? 0.8 * fps + 0.2 * (1000 / (now - last)) : 1000 / (now - last);
+      last = now;
+      updateLiveHud(summary, fps);
+    }
+    await new Promise((r) => requestAnimationFrame(r));
+  }
+}
+
+function drawLiveMask(ctx, mask, n) {
+  if (ctx.canvas.width !== n) ctx.canvas.width = ctx.canvas.height = n;
+  const img = ctx.createImageData(n, n);
+  const pal = BlightEngine.meta.palette;
+  for (let p = 0; p < mask.length; p++) {
+    const c = mask[p];
+    if (c >= 2) { img.data.set(pal[c], 4 * p); img.data[4 * p + 3] = 210; }
+    else if (c === 1) { img.data[4 * p + 1] = 255; img.data[4 * p + 3] = 30; } // faint leaf tint
+  }
+  ctx.putImageData(img, 0, 0);
+}
+
+function updateLiveHud(s, fps) {
+  $("liveFps").textContent = `${fps.toFixed(1)} fps`;
+  if (s.diagnosis === "no_leaf" || s.leaf_coverage_pct < 4) {
+    $("liveDx").textContent = "Point at a leaf";
+    $("liveStats").textContent = "Fill the square with a single leaf.";
+    return;
+  }
+  $("liveDx").textContent = s.diagnosis === "healthy" ? "Looks healthy" : title(s.diagnosis);
+  $("liveStats").textContent = `${fmtPct(s.affected_pct)} of leaf affected · ${s.lesion_count} lesion${s.lesion_count === 1 ? "" : "s"}`;
+}
+
+function stopLive() {
+  liveRunning = false;
+  liveStream?.getTracks().forEach((t) => t.stop());
+  liveStream = null;
+  $("liveVideo").srcObject = null;
+  if ($("live").open) $("live").close();
+}
+
+$("liveBtn").onclick = () => startLive();
+$("liveClose").onclick = stopLive;
+$("live").addEventListener("close", () => { if (liveRunning || liveStream) stopLive(); });
+$("liveCapture").onclick = async () => {
+  $("liveCapture").disabled = true;
+  $("liveDx").textContent = "Analyzing…";
+  liveRunning = false;
+  try {
+    const res = await BlightEngine.analyze($("liveVideo"));
+    res.source = "live";
+    stopLive();
+    show(res, true);
+  } catch (e) { stopLive(); fail(`Couldn't analyze: ${e.message}`); }
+};
+if (navigator.mediaDevices?.getUserMedia && FORCE_ENGINE !== "server") $("liveBtn").hidden = false;
+else $("btnRow").style.gridTemplateColumns = "1fr";
+
 /* ---------- PWA install + offline shell ---------- */
 let deferredInstall = null;
 window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); deferredInstall = e; $("installBtn").hidden = false; });
@@ -590,18 +773,30 @@ $("installBtn").onclick = async () => { if (!deferredInstall) return; deferredIn
 if ("serviceWorker" in navigator && !API) navigator.serviceWorker.register("sw.js").catch(() => {});
 
 /* ---------- boot ---------- */
-(async function init() {
+async function probeServer() {
+  if (FORCE_ENGINE === "device") return false;
   try {
-    const c = await api("/classes");
-    classes = Object.fromEntries(c.classes.map((x) => [x.id, x]));
+    const r = await fetch(apiUrl("health"), { signal: AbortSignal.timeout(2000) });
+    return r.ok && (await r.json()).status === "ok";
+  } catch { return false; }
+}
+
+(async function init() {
+  const hex = (rgb) => `#${rgb.map((v) => v.toString(16).padStart(2, "0")).join("")}`;
+  const [meta, up] = await Promise.all([BlightEngine.loadMeta().catch(() => null), probeServer()]);
+  serverUp = up;
+  if (meta) {
+    classes = Object.fromEntries(meta.classes.map((id, i) => [id, { id, name: meta.names[id], color: hex(meta.palette[i]) }]));
     for (const b of $("samples").children) {
       const color = classes[b.dataset.kind]?.color;
       b.querySelector("i").style.background = color || (b.dataset.kind === "healthy" ? classes.leaf?.color : "var(--muted)");
     }
-  } catch { /* legend falls back to grey */ }
+  }
   renderHistory();
-  const deep = new URLSearchParams(location.search).get("sample");
+  const deep = PARAMS.get("sample");
   if (deep) sample(deep);
+  // Warm the on-device model in the background unless the user is saving data.
+  else if (!navigator.connection?.saveData) (window.requestIdleCallback || setTimeout)(() => BlightEngine.load().catch(() => {}));
 })();
 </script>
 </body>

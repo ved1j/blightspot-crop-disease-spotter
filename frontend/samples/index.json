@@ -1,0 +1,332 @@
+[
+ {
+  "kind": "healthy",
+  "image": "samples/healthy-0.png",
+  "mask": "samples/healthy-0.mask.png",
+  "ground_truth": {
+   "diagnosis": "healthy",
+   "severity": "healthy",
+   "affected_pct": 0.0,
+   "lesion_count": 0
+  }
+ },
+ {
+  "kind": "healthy",
+  "image": "samples/healthy-1.png",
+  "mask": "samples/healthy-1.mask.png",
+  "ground_truth": {
+   "diagnosis": "healthy",
+   "severity": "healthy",
+   "affected_pct": 0.0,
+   "lesion_count": 0
+  }
+ },
+ {
+  "kind": "healthy",
+  "image": "samples/healthy-2.png",
+  "mask": "samples/healthy-2.mask.png",
+  "ground_truth": {
+   "diagnosis": "healthy",
+   "severity": "healthy",
+   "affected_pct": 0.0,
+   "lesion_count": 0
+  }
+ },
+ {
+  "kind": "healthy",
+  "image": "samples/healthy-3.png",
+  "mask": "samples/healthy-3.mask.png",
+  "ground_truth": {
+   "diagnosis": "healthy",
+   "severity": "healthy",
+   "affected_pct": 0.0,
+   "lesion_count": 0
+  }
+ },
+ {
+  "kind": "healthy",
+  "image": "samples/healthy-4.png",
+  "mask": "samples/healthy-4.mask.png",
+  "ground_truth": {
+   "diagnosis": "healthy",
+   "severity": "healthy",
+   "affected_pct": 0.0,
+   "lesion_count": 0
+  }
+ },
+ {
+  "kind": "healthy",
+  "image": "samples/healthy-5.png",
+  "mask": "samples/healthy-5.mask.png",
+  "ground_truth": {
+   "diagnosis": "healthy",
+   "severity": "healthy",
+   "affected_pct": 0.0,
+   "lesion_count": 0
+  }
+ },
+ {
+  "kind": "early_blight",
+  "image": "samples/early_blight-0.png",
+  "mask": "samples/early_blight-0.mask.png",
+  "ground_truth": {
+   "diagnosis": "early_blight",
+   "severity": "mild",
+   "affected_pct": 3.72,
+   "lesion_count": 2
+  }
+ },
+ {
+  "kind": "early_blight",
+  "image": "samples/early_blight-1.png",
+  "mask": "samples/early_blight-1.mask.png",
+  "ground_truth": {
+   "diagnosis": "early_blight",
+   "severity": "mild",
+   "affected_pct": 4.45,
+   "lesion_count": 3
+  }
+ },
+ {
+  "kind": "early_blight",
+  "image": "samples/early_blight-2.png",
+  "mask": "samples/early_blight-2.mask.png",
+  "ground_truth": {
+   "diagnosis": "early_blight",
+   "severity": "mild",
+   "affected_pct": 1.69,
+   "lesion_count": 3
+  }
+ },
+ {
+  "kind": "early_blight",
+  "image": "samples/early_blight-3.png",
+  "mask": "samples/early_blight-3.mask.png",
+  "ground_truth": {
+   "diagnosis": "early_blight",
+   "severity": "moderate",
+   "affected_pct": 11.88,
+   "lesion_count": 4
+  }
+ },
+ {
+  "kind": "early_blight",
+  "image": "samples/early_blight-4.png",
+  "mask": "samples/early_blight-4.mask.png",
+  "ground_truth": {
+   "diagnosis": "early_blight",
+   "severity": "moderate",
+   "affected_pct": 7.33,
+   "lesion_count": 2
+  }
+ },
+ {
+  "kind": "early_blight",
+  "image": "samples/early_blight-5.png",
+  "mask": "samples/early_blight-5.mask.png",
+  "ground_truth": {
+   "diagnosis": "early_blight",
+   "severity": "moderate",
+   "affected_pct": 6.56,
+   "lesion_count": 2
+  }
+ },
+ {
+  "kind": "rust",
+  "image": "samples/rust-0.png",
+  "mask": "samples/rust-0.mask.png",
+  "ground_truth": {
+   "diagnosis": "rust",
+   "severity": "mild",
+   "affected_pct": 2.07,
+   "lesion_count": 5
+  }
+ },
+ {
+  "kind": "rust",
+  "image": "samples/rust-1.png",
+  "mask": "samples/rust-1.mask.png",
+  "ground_truth": {
+   "diagnosis": "rust",
+   "severity": "moderate",
+   "affected_pct": 5.52,
+   "lesion_count": 23
+  }
+ },
+ {
+  "kind": "rust",
+  "image": "samples/rust-2.png",
+  "mask": "samples/rust-2.mask.png",
+  "ground_truth": {
+   "diagnosis": "rust",
+   "severity": "mild",
+   "affected_pct": 3.96,
+   "lesion_count": 3
+  }
+ },
+ {
+  "kind": "rust",
+  "image": "samples/rust-3.png",
+  "mask": "samples/rust-3.mask.png",
+  "ground_truth": {
+   "diagnosis": "rust",
+   "severity": "mild",
+   "affected_pct": 3.0,
+   "lesion_count": 10
+  }
+ },
+ {
+  "kind": "rust",
+  "image": "samples/rust-4.png",
+  "mask": "samples/rust-4.mask.png",
+  "ground_truth": {
+   "diagnosis": "rust",
+   "severity": "moderate",
+   "affected_pct": 8.73,
+   "lesion_count": 20
+  }
+ },
+ {
+  "kind": "rust",
+  "image": "samples/rust-5.png",
+  "mask": "samples/rust-5.mask.png",
+  "ground_truth": {
+   "diagnosis": "rust",
+   "severity": "mild",
+   "affected_pct": 0.9,
+   "lesion_count": 5
+  }
+ },
+ {
+  "kind": "powdery_mildew",
+  "image": "samples/powdery_mildew-0.png",
+  "mask": "samples/powdery_mildew-0.mask.png",
+  "ground_truth": {
+   "diagnosis": "powdery_mildew",
+   "severity": "mild",
+   "affected_pct": 1.71,
+   "lesion_count": 2
+  }
+ },
+ {
+  "kind": "powdery_mildew",
+  "image": "samples/powdery_mildew-1.png",
+  "mask": "samples/powdery_mildew-1.mask.png",
+  "ground_truth": {
+   "diagnosis": "powdery_mildew",
+   "severity": "severe",
+   "affected_pct": 24.09,
+   "lesion_count": 4
+  }
+ },
+ {
+  "kind": "powdery_mildew",
+  "image": "samples/powdery_mildew-2.png",
+  "mask": "samples/powdery_mildew-2.mask.png",
+  "ground_truth": {
+   "diagnosis": "powdery_mildew",
+   "severity": "moderate",
+   "affected_pct": 6.62,
+   "lesion_count": 4
+  }
+ },
+ {
+  "kind": "powdery_mildew",
+  "image": "samples/powdery_mildew-3.png",
+  "mask": "samples/powdery_mildew-3.mask.png",
+  "ground_truth": {
+   "diagnosis": "powdery_mildew",
+   "severity": "moderate",
+   "affected_pct": 14.22,
+   "lesion_count": 5
+  }
+ },
+ {
+  "kind": "powdery_mildew",
+  "image": "samples/powdery_mildew-4.png",
+  "mask": "samples/powdery_mildew-4.mask.png",
+  "ground_truth": {
+   "diagnosis": "powdery_mildew",
+   "severity": "moderate",
+   "affected_pct": 12.04,
+   "lesion_count": 6
+  }
+ },
+ {
+  "kind": "powdery_mildew",
+  "image": "samples/powdery_mildew-5.png",
+  "mask": "samples/powdery_mildew-5.mask.png",
+  "ground_truth": {
+   "diagnosis": "powdery_mildew",
+   "severity": "moderate",
+   "affected_pct": 13.01,
+   "lesion_count": 4
+  }
+ },
+ {
+  "kind": "bacterial_spot",
+  "image": "samples/bacterial_spot-0.png",
+  "mask": "samples/bacterial_spot-0.mask.png",
+  "ground_truth": {
+   "diagnosis": "bacterial_spot",
+   "severity": "mild",
+   "affected_pct": 3.26,
+   "lesion_count": 26
+  }
+ },
+ {
+  "kind": "bacterial_spot",
+  "image": "samples/bacterial_spot-1.png",
+  "mask": "samples/bacterial_spot-1.mask.png",
+  "ground_truth": {
+   "diagnosis": "bacterial_spot",
+   "severity": "mild",
+   "affected_pct": 3.77,
+   "lesion_count": 16
+  }
+ },
+ {
+  "kind": "bacterial_spot",
+  "image": "samples/bacterial_spot-2.png",
+  "mask": "samples/bacterial_spot-2.mask.png",
+  "ground_truth": {
+   "diagnosis": "bacterial_spot",
+   "severity": "mild",
+   "affected_pct": 0.96,
+   "lesion_count": 11
+  }
+ },
+ {
+  "kind": "bacterial_spot",
+  "image": "samples/bacterial_spot-3.png",
+  "mask": "samples/bacterial_spot-3.mask.png",
+  "ground_truth": {
+   "diagnosis": "bacterial_spot",
+   "severity": "mild",
+   "affected_pct": 4.18,
+   "lesion_count": 14
+  }
+ },
+ {
+  "kind": "bacterial_spot",
+  "image": "samples/bacterial_spot-4.png",
+  "mask": "samples/bacterial_spot-4.mask.png",
+  "ground_truth": {
+   "diagnosis": "bacterial_spot",
+   "severity": "mild",
+   "affected_pct": 2.24,
+   "lesion_count": 18
+  }
+ },
+ {
+  "kind": "bacterial_spot",
+  "image": "samples/bacterial_spot-5.png",
+  "mask": "samples/bacterial_spot-5.mask.png",
+  "ground_truth": {
+   "diagnosis": "bacterial_spot",
+   "severity": "mild",
+   "affected_pct": 1.14,
+   "lesion_count": 11
+  }
+ }
+]

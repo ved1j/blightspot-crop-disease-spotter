@@ -1,8 +1,10 @@
-// Offline app shell: cache static assets; always go to the network for API calls.
-const CACHE = "blightspot-shell-v2";
-const SHELL = ["./", "index.html", "manifest.webmanifest", "icons/favicon.svg",
-               "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
+// Offline support: network-first for our own files (so deploys show up at once),
+// cache-first for the pinned onnxruntime-web CDN files, never cache API calls.
+const CACHE = "blightspot-v3";
+const SHELL = ["./", "index.html", "engine.js", "manifest.webmanifest", "model/meta.json",
+               "icons/favicon.svg", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 const API = ["/analyze", "/sample", "/classes", "/metrics", "/health"];
+const CDN = "https://cdn.jsdelivr.net/npm/onnxruntime-web@";
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -15,17 +17,25 @@ self.addEventListener("activate", (e) => {
 });
 
 self.addEventListener("fetch", (e) => {
-  const url = new URL(e.request.url);
-  if (e.request.method !== "GET" || url.origin !== location.origin) return;
-  if (API.some((p) => url.pathname.endsWith(p))) return;
-  // Network-first so deploys show up immediately; fall back to cache when offline.
+  const req = e.request;
+  if (req.method !== "GET") return;
+  const url = new URL(req.url);
+
+  if (req.url.startsWith(CDN)) { // versioned + immutable: cache-first
+    e.respondWith(caches.match(req).then((hit) => hit || fetch(req).then((res) => {
+      if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); }
+      return res;
+    })));
+    return;
+  }
+  if (url.origin !== location.origin || API.some((p) => url.pathname.endsWith(p))) return;
+
   e.respondWith(
-    fetch(e.request)
+    fetch(req)
       .then((res) => {
-        const copy = res.clone();
-        caches.open(CACHE).then((c) => c.put(e.request, copy));
+        if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); }
         return res;
       })
-      .catch(() => caches.match(e.request).then((r) => r || caches.match("index.html")))
+      .catch(() => caches.match(req).then((r) => r || caches.match("index.html")))
   );
 });

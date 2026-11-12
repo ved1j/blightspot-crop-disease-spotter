@@ -27,7 +27,7 @@ DISCLAIMER = (
 PALETTE = np.array([
     [20, 20, 20],     # background
     [70, 170, 80],    # leaf
-    [150, 82, 30],    # early blight
+    [235, 55, 45],    # early blight (vivid red: brown would vanish on brown lesions)
     [255, 140, 20],   # rust
     [215, 225, 255],  # powdery mildew
     [205, 40, 200],   # bacterial spot

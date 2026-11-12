@@ -1,6 +1,9 @@
 # 🌿 BlightSpot: Crop Disease Spotter
 
 [![CI](https://github.com/ved1j/blightspot-crop-disease-spotter/actions/workflows/ci.yml/badge.svg)](https://github.com/ved1j/blightspot-crop-disease-spotter/actions/workflows/ci.yml)
+[![Live demo](https://img.shields.io/badge/demo-open%20on%20your%20phone-2b7a40)](https://ved1j.github.io/blightspot-crop-disease-spotter/)
+
+**▶ Try it: [ved1j.github.io/blightspot-crop-disease-spotter](https://ved1j.github.io/blightspot-crop-disease-spotter/)**. Open it on your phone and tap **Live scan**.
 
 You snap a leaf on your phone, and BlightSpot labels **every pixel** as background, healthy leaf, or one of four diseases. It then tells you what the leaf most likely has, how much of it is affected, and what to do about it.
 
@@ -8,7 +11,8 @@ It covers the full pipeline end to end:
 
 1. **Procedural data engine.** Synthetic leaves in 4 shapes, with 4 visually distinct diseases and photo-style degradations. Every image comes with a pixel-perfect label mask.
 2. **Segmentation model.** A 6-class PyTorch U-Net, trained on an endless stream of fresh synthetic images. It uses CUDA or Apple MPS when available.
-3. **Mobile-first PWA.** You can install it to your home screen. It has camera capture, a before/after slider, confidence maps, a per-disease breakdown, care tips, scan history, and a shareable report card.
+3. **On-device inference.** The model is exported to ONNX and runs **in the browser** through onnxruntime-web. Photos never leave the phone, the app works offline once it has loaded, and the whole demo is a static site.
+4. **Mobile-first PWA.** You can install it to your home screen. It has a **live camera mode** that highlights lesions in real time, a before/after slider, confidence maps, a per-disease breakdown, care tips, scan history, and a shareable report card.
 
 > **Not a diagnostic tool.** The model has only ever seen procedurally generated leaves. It's an educational/portfolio project. Confirm any real diagnosis with a local extension service or plant pathologist.
 
@@ -48,17 +52,19 @@ It covers the full pipeline end to end:
 Evaluated on 256 held-out images, after 3000 steps × 24 images (~14 min on mps).
 <!-- metrics:end -->
 
-`GET /metrics` serves these numbers, and you can see them in the app under **Model**. Expect real photos to score far lower. See [limitations](#limitations).
+`GET /metrics` serves these numbers, and you can see them in the app under **Model**. The browser engine gives **identical** results to PyTorch: across all 30 bundled samples it agrees on 30/30 diagnoses, with a 0.00-point difference in affected area. Expect real photos to score far lower. See [limitations](#limitations).
 
 ## What's inside
 
 ```
  data.py ─────────► training.py ─────────► weights/leaf_unet.pt + metrics.json
  procedural leaves    U-Net · CE + Dice          │
- + label masks        best-checkpoint by mIoU    ▼
-                                     inference.py (TTA, report, overlays)
-                                                 │
- frontend/ (PWA) ◄──── JSON + PNGs ──── main.py (FastAPI)
+ + label masks        best-checkpoint by mIoU    ├──► inference.py ──► main.py (FastAPI, optional)
+                                                 │                          │ JSON + PNGs
+                                                 └──► export_web.py         ▼
+                                                      ONNX + meta.json ──► frontend/ (PWA)
+                                                      + sample pack        engine.js runs the model
+                                                                           on-device (onnxruntime-web)
 ```
 
 ### Synthetic data (`backend/app/data.py`)
@@ -88,20 +94,36 @@ About 20% of leaves are healthy and about 10% of diseased leaves carry two disea
 - **Guardrails.** It warns when little leaf is in frame or when model confidence is low, which usually means the photo looks unlike the training data.
 - **Visuals.** A colour-coded overlay, a raw mask, and a viridis confidence map.
 
+### On-device engine (`frontend/engine.js`, `scripts/export_web.py`)
+
+- `export_web.py` exports the U-Net to ONNX with dynamic batch and size axes and checks it against PyTorch. It also writes `model/meta.json`, the single source of truth for classes, colours and disease info, and renders a pack of 30 synthetic samples with ground-truth masks.
+- `engine.js` loads onnxruntime-web (WASM) lazily from a pinned CDN version. It runs the same 4-view TTA as the server as one batched call, and ports `report()` and the overlay, mask and confidence renderers to JS. Because the output JSON has the same shape as `POST /analyze`, the UI doesn't care where a result came from.
+- The app sends photos to the on-device engine first. If the backend is reachable it can fall back to it, and it uses the backend for endlessly fresh `/sample`s. Without a backend (e.g. on GitHub Pages) it uses the bundled sample pack instead. `?engine=server` or `?engine=device` forces one engine.
+- Tests fail if the exported model or `meta.json` drift from the Python code (`tests/test_web_export.py`).
+
 ### Web app (`frontend/`)
 
-A single HTML file plus a manifest and service worker, with no build step:
+Static files only, with no build step:
 
+- 🎥 **Live scan**: an on-device segmentation overlay on the camera feed (~7 fps on a laptop, single-threaded WASM, 128 px). **Capture** freezes the frame and runs the full analysis with TTA.
 - 📷 camera capture (`capture="environment"`), gallery picker, drag-and-drop and paste
 - client-side downscaling and EXIF orientation fix for big phone photos (HEIC on iOS works too)
 - ↔️ before/after slider, plus Mask, Confidence and Ground-truth views
 - per-disease breakdown and an "About this disease" card with care tips
 - 🕑 recent-scan history stored on the device
 - 📤 **Share report**: renders a PNG report card and opens the native share sheet (or downloads it)
-- installable PWA with an offline app shell, dark mode, safe-area insets and reduced-motion support
+- installable PWA. The service worker caches the app, the model and the onnxruntime files, so it keeps working offline. Also dark mode, safe-area insets and reduced-motion support
 - deep links: `/?sample=rust` opens straight to a rust example
 
 ## Run it
+
+**Static (on-device only):** this is exactly what GitHub Pages serves.
+
+```bash
+python3 -m http.server 8000 --directory frontend
+```
+
+**Full stack (adds the API and fresh samples):**
 
 ```bash
 cd backend
@@ -112,7 +134,7 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 Open http://localhost:8000. On your phone, join the same Wi-Fi and open `http://<your-computer-ip>:8000`. Trained weights are committed. If they're missing, the API trains briefly on startup.
 
-> Camera capture and "Install app" need a secure context. Both work on `localhost`. To test on a phone over the LAN, put the server behind HTTPS (e.g. `ngrok http 8000` or `cloudflared tunnel`). Picking from the gallery works over plain HTTP.
+> Live scan, camera capture and "Install app" need a secure context. Both work on `localhost`. To test on a phone over the LAN, put the server behind HTTPS (e.g. `ngrok http 8000` or `cloudflared tunnel`). Picking from the gallery works over plain HTTP.
 
 **Docker**
 
@@ -128,6 +150,7 @@ cd backend
 python train.py                # 3000 steps; ~12 min on an Apple M-series GPU
 python train.py --steps 500    # quick run
 python ../scripts/make_gallery.py   # refresh docs/gallery.png
+pip install -r requirements-dev.txt && python ../scripts/export_web.py   # refresh the browser model + samples
 ```
 
 **Tests**
@@ -136,7 +159,7 @@ python ../scripts/make_gallery.py   # refresh docs/gallery.png
 cd backend && pytest -q
 ```
 
-CI (GitHub Actions) runs the tests and a smoke-training pass. It also builds the Docker image and boots it.
+CI (GitHub Actions) runs the tests (including the ONNX-vs-PyTorch check) and a smoke-training pass. It also builds the Docker image and boots it. A second workflow deploys `frontend/` to GitHub Pages on every push to `main`.
 
 ## API
 

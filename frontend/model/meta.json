@@ -1,0 +1,128 @@
+{
+ "img_size": 160,
+ "classes": [
+  "background",
+  "leaf",
+  "early_blight",
+  "rust",
+  "powdery_mildew",
+  "bacterial_spot"
+ ],
+ "disease_ids": [
+  "early_blight",
+  "rust",
+  "powdery_mildew",
+  "bacterial_spot"
+ ],
+ "palette": [
+  [
+   20,
+   20,
+   20
+  ],
+  [
+   70,
+   170,
+   80
+  ],
+  [
+   235,
+   55,
+   45
+  ],
+  [
+   255,
+   140,
+   20
+  ],
+  [
+   215,
+   225,
+   255
+  ],
+  [
+   205,
+   40,
+   200
+  ]
+ ],
+ "names": {
+  "background": "Background",
+  "leaf": "Leaf",
+  "early_blight": "Early blight",
+  "rust": "Rust",
+  "powdery_mildew": "Powdery mildew",
+  "bacterial_spot": "Bacterial spot"
+ },
+ "disease_info": {
+  "early_blight": {
+   "name": "Early blight",
+   "cause": "Fungus (Alternaria spp.)",
+   "symptoms": "Brown lesions with concentric 'target' rings and a yellow halo, usually starting on older, lower leaves.",
+   "tips": [
+    "Remove and dispose of infected lower leaves.",
+    "Water at the base; avoid wetting foliage.",
+    "Mulch to stop soil splashing onto leaves.",
+    "Rotate crops away from tomato/potato family for 2-3 years."
+   ]
+  },
+  "rust": {
+   "name": "Rust",
+   "cause": "Fungi (order Pucciniales)",
+   "symptoms": "Clusters of small, raised orange-to-brown pustules that rub off as powdery spores, often on leaf undersides.",
+   "tips": [
+    "Pick off and bag affected leaves early.",
+    "Improve air circulation by spacing and pruning.",
+    "Avoid overhead watering, especially in the evening.",
+    "Prefer rust-resistant varieties next season."
+   ]
+  },
+  "powdery_mildew": {
+   "name": "Powdery mildew",
+   "cause": "Fungi (order Erysiphales)",
+   "symptoms": "White to grey powdery patches on the leaf surface that can spread to cover the leaf.",
+   "tips": [
+    "Increase sunlight and airflow around plants.",
+    "Remove heavily coated leaves.",
+    "Avoid excess nitrogen fertiliser, which favours soft growth.",
+    "Sulfur or potassium-bicarbonate products are common organic options."
+   ]
+  },
+  "bacterial_spot": {
+   "name": "Bacterial spot",
+   "cause": "Bacteria (Xanthomonas spp.)",
+   "symptoms": "Many small, dark, angular, water-soaked spots, sometimes with thin yellow halos.",
+   "tips": [
+    "Don't handle plants while they are wet.",
+    "Water at soil level; splashing spreads the bacteria.",
+    "Sanitise tools and remove badly infected plants.",
+    "Use certified disease-free seed and rotate crops."
+   ]
+  }
+ },
+ "healthy_info": {
+  "name": "Healthy",
+  "cause": null,
+  "symptoms": "No disease symptoms detected on the visible leaf area.",
+  "tips": [
+   "Keep monitoring weekly; early detection makes management much easier."
+  ]
+ },
+ "disclaimer": "Demo only: this model was trained exclusively on procedurally generated synthetic leaves. It is not an agronomic diagnostic tool; confirm any real diagnosis with a local extension service or plant pathologist.",
+ "metrics": {
+  "pixel_acc": 0.9974490356445312,
+  "mean_disease_iou": 0.9384837498241848,
+  "diagnosis_acc": 0.9921875,
+  "iou": {
+   "background": 0.9976126251821535,
+   "leaf": 0.9904682325441517,
+   "early_blight": 0.9687206945578849,
+   "rust": 0.9456262898872837,
+   "powdery_mildew": 0.9134250947536405,
+   "bacterial_spot": 0.9261629200979301
+  },
+  "n_images": 256,
+  "steps": 3000,
+  "device": "mps"
+ }
+}
